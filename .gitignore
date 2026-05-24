@@ -1,0 +1,17 @@
+bin/
+obj/
+.vs/
+.vscode/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.log
+*.mdf
+*.ldf
+*.ndf
+*.sqlite
+packages/
+*.nupkg
+Publish/
+appsettings.Development.json
