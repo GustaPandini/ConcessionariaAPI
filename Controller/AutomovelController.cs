@@ -8,7 +8,7 @@ namespace ConcessionariaAPI.Controllers
     [Route("api/[controller]")]
     public class AutomovelController : ControllerBase
     {
-        private readonly AutomovelService _service;
+        private readonly IAutomovelService _service;
 
         public AutomovelController(AutomovelService service)
         {

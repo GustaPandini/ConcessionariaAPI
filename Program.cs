@@ -1,3 +1,4 @@
+using ConcessionariaAPI.Repositories;
 using ConcessionariaAPI.Repository;
 using ConcessionariaAPI.Services;
 
@@ -8,8 +9,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<AutomovelRepository>();
-builder.Services.AddScoped<AutomovelService>();
+builder.Services.AddScoped<IAutomovelRepository, AutomovelRepository>();
+builder.Services.AddScoped<IAutomovelService, AutomovelService>();
 
 var app = builder.Build();
 
