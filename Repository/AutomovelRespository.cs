@@ -1,10 +1,11 @@
 ﻿using ConcessionariaAPI.Entity;
 using MySql.Data.MySqlClient;
 using Dapper;
+using ConcessionariaAPI.Repositories;
 
 namespace ConcessionariaAPI.Repository
 {
-    public class AutomovelRepository : Database
+    public class AutomovelRepository : Database, IAutomovelRepository
     {
         private readonly Automovel _automovel;
         public AutomovelRepository(IConfiguration configuration) : base(configuration) { }
