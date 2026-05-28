@@ -1,5 +1,5 @@
-﻿using ConsoleApp2.Entity;
-using ConsoleApp2.Services;
+﻿using ConcessionariaAPI.Entity;
+using ConcessionariaAPI.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ConcessionariaAPI.Controllers

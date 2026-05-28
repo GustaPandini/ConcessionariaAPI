@@ -1,5 +1,4 @@
 ﻿using MySql.Data.MySqlClient;
-using Microsoft.Extensions.Configuration;
 using Dapper;
 
 namespace ConcessionariaAPI.Repository

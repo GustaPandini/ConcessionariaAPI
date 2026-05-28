@@ -1,9 +1,8 @@
-﻿using ConsoleApp2.Entity;
+﻿using ConcessionariaAPI.Entity;
 using MySql.Data.MySqlClient;
 using Dapper;
-using ConcessionariaAPI.Repository;
 
-namespace ConsoleApp2.Repository
+namespace ConcessionariaAPI.Repository
 {
     public class AutomovelRepository : Database
     {

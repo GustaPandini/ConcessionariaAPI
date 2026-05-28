@@ -1,4 +1,4 @@
-﻿namespace ConsoleApp2.Entity;
+﻿namespace ConcessionariaAPI.Entity;
 
 using System.ComponentModel.DataAnnotations;
 

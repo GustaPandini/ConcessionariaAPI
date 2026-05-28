@@ -1,5 +1,5 @@
-using ConsoleApp2.Repository;
-using ConsoleApp2.Services;
+using ConcessionariaAPI.Repository;
+using ConcessionariaAPI.Services;
 
 
 var builder = WebApplication.CreateBuilder(args);

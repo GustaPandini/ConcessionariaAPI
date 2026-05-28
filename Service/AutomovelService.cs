@@ -1,7 +1,7 @@
-﻿using ConsoleApp2.Entity;
-using ConsoleApp2.Repository;
+﻿using ConcessionariaAPI.Entity;
+using ConcessionariaAPI.Repository;
 
-namespace ConsoleApp2.Services
+namespace ConcessionariaAPI.Services
 {
     public class AutomovelService
     {
