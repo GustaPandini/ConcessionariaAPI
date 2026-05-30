@@ -17,10 +17,10 @@ namespace ConcessionariaAPI.Services
         public void Inserir(Automovel automovel)
         {
             if (!VerificarAnoValido(automovel))
-                throw new ArgumentException("Ano do modelo inválido. O ano do modelo deve ser igual ou um ano superior ao ano do automóvel.");
+                throw new ArgumentException("Ano inválido. O ano deve ser entre 1886 e o ano atual.");
 
             if (!VerificarAnoModeloValido(automovel))
-                throw new ArgumentException("Ano inválido. O ano deve ser entre 1886 e o ano atual.");
+                throw new ArgumentException("Ano do modelo inválido. O ano do modelo deve ser igual ou um ano superior ao ano do automóvel.");
 
             _repository.Inserir(automovel);
         }
@@ -28,12 +28,12 @@ namespace ConcessionariaAPI.Services
         public void Alterar(Automovel automovel)
         {
             if (!VerificarAnoValido(automovel))
-                throw new ArgumentException("Ano do modelo inválido. O ano do modelo deve ser igual ou um ano superior ao ano do automóvel.");
-
-            if (!VerificarAnoModeloValido(automovel))
                 throw new ArgumentException("Ano inválido. O ano deve ser entre 1886 e o ano atual.");
 
-            _repository.Inserir(automovel);
+            if (!VerificarAnoModeloValido(automovel))
+                throw new ArgumentException("Ano do modelo inválido. O ano do modelo deve ser igual ou um ano superior ao ano do automóvel.");
+
+            _repository.Alterar(automovel);
         }
 
         public void Deletar(Automovel automovel) => _repository.Deletar(automovel);

@@ -1,3 +1,4 @@
+using ConcessionariaAPI.Middlewares;
 using ConcessionariaAPI.Repositories;
 using ConcessionariaAPI.Repository;
 using ConcessionariaAPI.Services;
@@ -13,6 +14,8 @@ builder.Services.AddScoped<IAutomovelRepository, AutomovelRepository>();
 builder.Services.AddScoped<IAutomovelService, AutomovelService>();
 
 var app = builder.Build();
+
+app.UseMiddleware<GlobalExceptionMiddleware>();
 
 if (app.Environment.IsDevelopment())
 {
