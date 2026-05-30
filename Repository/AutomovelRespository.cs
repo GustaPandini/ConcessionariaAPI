@@ -20,7 +20,9 @@ namespace ConcessionariaAPI.Repository
         }
         public List<Automovel> Listar()
         {
-            string sql = @"SELECT * FROM automovel";
+            string sql = @"SELECT 
+                         Id, Marca, Modelo, Powertrain, Versao, Cor, Ano, AnoModelo, Quilometragem, Preco, Blindado, QuantidadeDonos
+                         FROM automovel";
 
             using (MySqlConnection conexao = GetConnection())
             {
@@ -39,7 +41,9 @@ namespace ConcessionariaAPI.Repository
         }
         public Automovel MostrarAutomovelPorId(int Id)
         {
-            string sql = @"SELECT * FROM automovel WHERE Id = @id";
+            string sql = @"SELECT 
+                         Id, Marca, Modelo, Powertrain, Versao, Cor, Ano, AnoModelo, Quilometragem, Preco, Blindado, QuantidadeDonos
+                         FROM automovel WHERE Id = @id";
             using (MySqlConnection conexao = GetConnection())
             {
                 return conexao.QuerySingleOrDefault<Automovel>(sql, new { Id });
