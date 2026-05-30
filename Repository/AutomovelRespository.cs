@@ -7,7 +7,7 @@ namespace ConcessionariaAPI.Repository
 {
     public class AutomovelRepository : Database, IAutomovelRepository
     {
-        private readonly Automovel _automovel;
+        
         public AutomovelRepository(IConfiguration configuration) : base(configuration) { }
 
         public void Inserir(Automovel automovel)
