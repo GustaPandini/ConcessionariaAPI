@@ -1,13 +1,14 @@
-﻿using ConcessionariaAPI.Entity;
-using ConcessionariaAPI.Repository;
+﻿using ConcessionariaAPI.Entities;
+using ConcessionariaAPI.Repositories;
+
 
 namespace ConcessionariaAPI.Services
 {
-    public class AutomovelService
+    public class AutomovelService : IAutomovelService
     {
-        private readonly AutomovelRepository _repository;
+        private readonly IAutomovelRepository _repository;
 
-        public AutomovelService(AutomovelRepository repository)
+        public AutomovelService(IAutomovelRepository repository)
         {
             
             _repository = repository;

@@ -1,7 +1,7 @@
-﻿using ConcessionariaAPI.Entity;
-using MySql.Data.MySqlClient;
+﻿using MySql.Data.MySqlClient;
 using Dapper;
 using ConcessionariaAPI.Repositories;
+using ConcessionariaAPI.Entities;
 
 namespace ConcessionariaAPI.Repository
 {

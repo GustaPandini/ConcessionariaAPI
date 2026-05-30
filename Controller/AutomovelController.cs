@@ -1,4 +1,5 @@
-﻿using ConcessionariaAPI.Entity;
+﻿using ConcessionariaAPI.Dtos;
+using ConcessionariaAPI.Entities;
 using ConcessionariaAPI.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,7 +11,7 @@ namespace ConcessionariaAPI.Controllers
     {
         private readonly IAutomovelService _service;
 
-        public AutomovelController(AutomovelService service)
+        public AutomovelController(IAutomovelService service)
         {
             _service = service;
         }
@@ -19,7 +20,8 @@ namespace ConcessionariaAPI.Controllers
         public IActionResult Listar()
         {
             var automoveis = _service.Listar();
-            return Ok(automoveis);
+            var response = automoveis.Select(a => MapearParaResponse(a)).ToList();
+            return Ok(response);
         }
 
         [HttpGet("{id}")]
@@ -30,31 +32,33 @@ namespace ConcessionariaAPI.Controllers
             {
                 return NotFound();
             }
-            return Ok(automovel);
+            return Ok(MapearParaResponse(automovel));
         }
 
         [HttpPost]
-        public IActionResult Inserir([FromBody] Automovel automovel)
+        public IActionResult Inserir([FromBody] AutomovelRequestDTO requestDto)
         {
+            var automovel = MapearParaEntidade(requestDto);
+
             _service.Inserir(automovel);
-            return CreatedAtAction(nameof(ObterPorId), new { id = automovel.Id }, automovel);
+
+            var response = MapearParaResponse(automovel);
+            return CreatedAtAction(nameof(ObterPorId), new { id = response.Id }, response);
         }
 
         [HttpPut("{id}")]
-        public IActionResult Alterar(int id, [FromBody] Automovel automovel)
+        public IActionResult Alterar(int id, [FromBody] AutomovelRequestDTO requestDto)
         {
-            if (id != automovel.Id)
-            {
-                return BadRequest("O ID da URL não corresponde ao ID do objeto.");
-            }
-
             var existe = _service.ObterPorId(id);
             if (existe == null)
             {
                 return NotFound();
             }
 
-            _service.Alterar(automovel);
+            var automovelAtualizado = MapearParaEntidade(requestDto);
+            automovelAtualizado.Id = id;
+
+            _service.Alterar(automovelAtualizado);
             return NoContent();
         }
 
@@ -69,6 +73,43 @@ namespace ConcessionariaAPI.Controllers
 
             _service.Deletar(automovel);
             return NoContent();
+        }
+
+        private Automovel MapearParaEntidade(AutomovelRequestDTO dto)
+        {
+            return new Automovel
+            {
+                Marca = dto.Marca,
+                Modelo = dto.Modelo,
+                Powertrain = dto.Powertrain,
+                Versao = dto.Versao,
+                Cor = dto.Cor,
+                Ano = dto.Ano,
+                AnoModelo = dto.AnoModelo,
+                Quilometragem = dto.Quilometragem,
+                Preco = dto.Preco,
+                Blindado = dto.Blindado,
+                QuantidadeDonos = dto.QuantidadeDonos
+            };
+        }
+
+        private AutomovelResponseDTO MapearParaResponse(Automovel automovel)
+        {
+            return new AutomovelResponseDTO
+            {
+                Id = automovel.Id,
+                Marca = automovel.Marca,
+                Modelo = automovel.Modelo,
+                Powertrain = automovel.Powertrain,
+                Versao = automovel.Versao,
+                Cor = automovel.Cor,
+                Ano = automovel.Ano,
+                AnoModelo = automovel.AnoModelo,
+                Quilometragem = automovel.Quilometragem,
+                Preco = automovel.Preco,
+                Blindado = automovel.Blindado,
+                QuantidadeDonos = automovel.QuantidadeDonos
+            };
         }
     }
 }

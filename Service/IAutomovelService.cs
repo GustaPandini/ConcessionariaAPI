@@ -1,4 +1,4 @@
-﻿using ConcessionariaAPI.Entity;
+﻿using ConcessionariaAPI.Entities;
 
 namespace ConcessionariaAPI.Services
 {

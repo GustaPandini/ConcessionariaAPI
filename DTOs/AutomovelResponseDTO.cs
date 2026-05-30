@@ -1,6 +1,6 @@
-﻿namespace ConcessionariaAPI.Entities
+﻿namespace ConcessionariaAPI.Dtos
 {
-    public class Automovel
+    public class AutomovelResponseDTO
     {
         public int Id { get; set; }
         public string Marca { get; set; }
