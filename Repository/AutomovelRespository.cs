@@ -31,9 +31,9 @@ namespace ConcessionariaAPI.Repository
         public void Alterar(Automovel automovel)
         {
             string sql = @"UPDATE automovel 
-                         SET MARCA = @marca, MODELO = @modelo, POWERTRAIN = @powertrain, VERSAO = @versao, COR = @cor, 
-                         ANO = @ano, ANOMODELO = @anoModelo, QUILOMETRAGEM = @quilometragem, PRECO = @preco, 
-                         BLINDADO = @blindado, QUANTIDADEDONOS = @quantidadeDonos WHERE Id = @id";
+                         SET MARCA = @Marca, MODELO = @Modelo, POWERTRAIN = @Powertrain, VERSAO = @Versao, COR = @Cor, 
+                         ANO = @Ano, ANOMODELO = @AnoModelo, QUILOMETRAGEM = @Quilometragem, PRECO = @Preco, 
+                         BLINDADO = @Blindado, QUANTIDADEDONOS = @QuantidadeDonos WHERE Id = @id";
 
             Execute(sql, automovel);
         }
