@@ -16,40 +16,24 @@ namespace ConcessionariaAPI.Services
 
         public void Inserir(Automovel automovel)
         {
-            if (VerificarAnoValido(automovel))
-            {
-                if (VerificarAnoModeloValido(automovel))
-                {
-                    _repository.Inserir(automovel);
-                }
-                else
-                {
-                    throw new ArgumentException("Ano do modelo inválido. O ano do modelo deve ser igual ou um ano superior ao ano do automóvel.");
-                }
-            }
-            else
-            {
-                throw new ArgumentException("Ano inválido. O ano deve ser entre 1886 e o ano atual.");
-            }
+            if (!VerificarAnoValido(automovel))
+                throw new ArgumentException("Ano inválido...");
+
+            if (!VerificarAnoModeloValido(automovel))
+                throw new ArgumentException("Ano do modelo inválido...");
+
+            _repository.Inserir(automovel);
         }
 
         public void Alterar(Automovel automovel)
         {
-            if (VerificarAnoValido(automovel))
-            {
-                if (VerificarAnoModeloValido(automovel))
-                {
-                    _repository.Alterar(automovel);
-                }
-                else
-                {
-                    throw new ArgumentException("Ano do modelo inválido. O ano do modelo deve ser igual ou um ano superior ao ano do automóvel.");
-                }
-            }
-            else
-            {
-                throw new ArgumentException("Ano inválido. O ano deve ser entre 1886 e o ano atual.");
-            }
+            if (!VerificarAnoValido(automovel))
+                throw new ArgumentException("Ano inválido...");
+
+            if (!VerificarAnoModeloValido(automovel))
+                throw new ArgumentException("Ano do modelo inválido...");
+
+            _repository.Inserir(automovel);
         }
 
         public void Deletar(Automovel automovel) => _repository.Deletar(automovel);

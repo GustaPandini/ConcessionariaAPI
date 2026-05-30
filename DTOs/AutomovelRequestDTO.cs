@@ -19,7 +19,6 @@ namespace ConcessionariaAPI.Dtos
         [Required(ErrorMessage = "A Cor é obrigatória.")]
         public string Cor { get; set; }
 
-        [Range(1886, int.MaxValue, ErrorMessage = "O ano deve ser maior que 1886.")]
         public int Ano { get; set; }
 
         public int AnoModelo { get; set; }
