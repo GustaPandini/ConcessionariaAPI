@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { FaTrash, FaPencilAlt, FaPlus } from 'react-icons/fa';
 
-const API_URL = 'https://localhost:7123/api/Automovel'; 
+const API_URL = 'https://localhost:7112/api/Automovel'; 
 
 function App() {
   const [automoveis, setAutomoveis] = useState([]);
@@ -35,7 +35,6 @@ function App() {
   return (
     <div style={styles.container}>
       
-      {/* CABEÇALHO (FIXO NO TOPO) */}
       <header style={styles.header}>
         <div style={styles.logo}>Tainy</div>
         <button onClick={() => alert('Abrir modal de cadastro')} style={styles.addButton}>
@@ -43,16 +42,14 @@ function App() {
         </button>
       </header>
 
-      {/* MENSAGEM DE ERRO CASO A API FALHE */}
       {erro && <div style={styles.errorBanner}>{erro}</div>}
 
-      {/* BODY / GRID DE CARTÕES */}
       <main style={styles.mainContent}>
         <div style={styles.grid}>
           {automoveis.map((carro) => (
             <div key={carro.id} style={styles.card}>
               
-              {/* Informações do Carro */}
+
               <div style={styles.cardInfo}>
                 <h3 style={styles.carTitle}>{carro.marca} {carro.modelo}</h3>
                 <p style={styles.carDetails}>{carro.versao} • {carro.cor} {carro.blindado && '🛡️'}</p>
@@ -62,7 +59,6 @@ function App() {
                 </div>
               </div>
 
-              {/* Botões de Ação no Rodapé do Cartão */}
               <div style={styles.cardActions}>
                 <button 
                   onClick={() => alert('Função Editar em desenvolvimento')} 
@@ -88,27 +84,26 @@ function App() {
   );
 }
 
-// --- ESTILIZAÇÃO ATUALIZADA ---
 const styles = {
   container: {
     fontFamily: '"Segoe UI", Roboto, Helvetica, Arial, sans-serif',
     backgroundColor: '#f8f9fa',
     minHeight: '100vh',
-    paddingTop: '90px', // IMPORTANTE: Abre espaço no topo para o cabeçalho não cobrir os cartões
+    paddingTop: '90px',
     color: '#212529'
   },
   header: {
     position: 'fixed',
-    top: 0, // Movido para o topo
+    top: 0, 
     left: 0,
     right: 0,
     height: '70px',
-    backgroundColor: '#1a1b1e', // Mantém o grafite escuro elegante
+    backgroundColor: '#1a1b1e', 
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
     padding: '0 40px',
-    boxShadow: '0 4px 10px rgba(0,0,0,0.1)', // Sombra agora aponta para baixo
+    boxShadow: '0 4px 10px rgba(0,0,0,0.1)', 
     zIndex: 1000
   },
   logo: {

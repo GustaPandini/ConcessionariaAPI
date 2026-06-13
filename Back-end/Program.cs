@@ -13,6 +13,17 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IAutomovelRepository, AutomovelRepository>();
 builder.Services.AddScoped<IAutomovelService, AutomovelService>();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("PermitirFrontEnd",
+        policy =>
+        {
+            policy.WithOrigins("http://localhost:5173")
+                  .AllowAnyHeader()
+                  .AllowAnyMethod();
+        });
+});
+
 var app = builder.Build();
 
 app.UseMiddleware<GlobalExceptionMiddleware>();
@@ -24,6 +35,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseCors("PermitirFrontEnd");
 app.UseAuthorization();
 app.MapControllers();
 
