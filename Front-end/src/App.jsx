@@ -2,9 +2,10 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { FaTrash, FaPencilAlt, FaPlus, FaTimes } from 'react-icons/fa';
 
-const API_URL = 'https://localhost:7112/api/Automovel'; 
+const API_URL = 'https://localhost:7112/api/Automovel';
 
 function App() {
+  const [erroModal, setErroModal] = useState('');
   const [automoveis, setAutomoveis] = useState([]);
   const [erro, setErro] = useState('');
 
@@ -47,6 +48,7 @@ function App() {
       ano: null, anoModelo: null, quilometragem: null,
       powertrain: '', blindado: false, preco: null, quantidadeDonos: null
     });
+    setErroModal('');
     setIsModalAberto(true);
   };
 
@@ -67,6 +69,8 @@ function App() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setErroModal('');
+
     try {
       if (modoEdicao) {
         await axios.put(`${API_URL}/${idEmEdicao}`, formData);
@@ -76,7 +80,11 @@ function App() {
       setIsModalAberto(false);
       buscarAutomoveis();
     } catch (err) {
-      alert('Erro ao salvar os dados do automóvel.');
+      if (err.response && err.response.data) {
+        setErroModal(err.response.data.message || err.response.data);
+      } else {
+        setErroModal('Ocorreu um erro inesperado ao salvar.');
+      }
     }
   };
 
@@ -93,7 +101,7 @@ function App() {
 
   return (
     <div style={styles.container}>
-      
+
       <header style={styles.header}>
         <div style={styles.logo}>Tainy</div>
         <button onClick={abrirModalCadastro} style={styles.addButton}>
@@ -117,15 +125,15 @@ function App() {
               </div>
 
               <div style={styles.cardActions}>
-                <button 
-                  onClick={() => abrirModalEdicao(carro)} 
+                <button
+                  onClick={() => abrirModalEdicao(carro)}
                   style={{ ...styles.actionButton, backgroundColor: '#f1f3f5', color: '#495057' }}
                   title="Editar"
                 >
                   <FaPencilAlt />
                 </button>
-                <button 
-                  onClick={() => handleDeletar(carro.id)} 
+                <button
+                  onClick={() => handleDeletar(carro.id)}
                   style={{ ...styles.actionButton, backgroundColor: '#fff5f5', color: '#e03131' }}
                   title="Deletar"
                 >
@@ -140,13 +148,19 @@ function App() {
       {isModalAberto && (
         <div style={styles.modalOverlay}>
           <div style={styles.modalContent}>
-            
+
             <div style={styles.modalHeader}>
               <h2>{modoEdicao ? 'Editar Automóvel' : 'Cadastrar Novo Automóvel'}</h2>
               <button onClick={() => setIsModalAberto(false)} style={styles.closeButton}>
                 <FaTimes />
               </button>
             </div>
+
+            {erroModal && (
+              <div style={{ backgroundColor: '#ffe3e3', color: '#e03131', padding: '10px', borderRadius: '6px', marginBottom: '15px', fontSize: '0.9rem', fontWeight: 'bold' }}>
+                ⚠️ {erroModal}
+              </div>
+            )}
 
             <form onSubmit={handleSubmit} style={styles.form}>
               <div style={styles.formRow}>
@@ -169,10 +183,28 @@ function App() {
 
               <div style={styles.formRow}>
                 <label style={styles.label}>Ano Fabricação:
-                  <input type="number" name="ano" value={formData.ano} onChange={handleInputChange} required style={styles.input} />
+                  <input
+                    type="number"
+                    name="ano"
+                    value={formData.ano}
+                    onChange={handleInputChange}
+                    required
+                    min="1886"
+                    max={new Date().getFullYear()}
+                    style={styles.input}
+                  />
                 </label>
                 <label style={styles.label}>Ano Modelo:
-                  <input type="number" name="anoModelo" value={formData.anoModelo} onChange={handleInputChange} required style={styles.input} />
+                  <input
+                    type="number"
+                    name="anoModelo"
+                    value={formData.anoModelo}
+                    onChange={handleInputChange}
+                    required
+                    min={formData.ano}
+                    max={formData.ano + 1}
+                    style={styles.input}
+                  />
                 </label>
               </div>
 
@@ -230,7 +262,7 @@ const styles = {
   priceTag: { fontSize: '1.3rem', fontWeight: '700', color: '#2b8a3e' },
   cardActions: { display: 'flex', borderTop: '1px solid #f1f3f5', padding: '12px 20px', gap: '10px', backgroundColor: '#fafbfc' },
   actionButton: { flex: 1, padding: '10px', border: 'none', borderRadius: '6px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' },
-  
+
   modalOverlay: {
     position: 'fixed',
     top: 0, left: 0, right: 0, bottom: 0,
