@@ -3,6 +3,7 @@
     public class Automovel
     {
         public int Id { get; set; }
+        public string PlacaOuChassi { get; set; }
         public string Marca { get; set; }
         public string Modelo { get; set; }
         public string Powertrain { get; set; }

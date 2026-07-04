@@ -13,15 +13,15 @@ namespace ConcessionariaAPI.Repository
         public void Inserir(Automovel automovel)
         {
             string sql = @"INSERT INTO automovel 
-                         (Marca, Modelo, Powertrain, Versao, Cor, Ano, AnoModelo, Quilometragem, Preco, Blindado, QuantidadeDonos) 
+                         (PlacaOuChassi, Marca, Modelo, Powertrain, Versao, Cor, Ano, AnoModelo, Quilometragem, Preco, Blindado, QuantidadeDonos) 
                          VALUEs 
-                         (@Marca, @Modelo, @Powertrain, @Versao, @Cor, @Ano, @AnoModelo, @Quilometragem, @Preco, @Blindado, @QuantidadeDonos)";
+                         (@PlacaOuChassi, @Marca, @Modelo, @Powertrain, @Versao, @Cor, @Ano, @AnoModelo, @Quilometragem, @Preco, @Blindado, @QuantidadeDonos)";
             Execute(sql, automovel);
         }
         public List<Automovel> Listar()
         {
             string sql = @"SELECT 
-                         Id, Marca, Modelo, Powertrain, Versao, Cor, Ano, AnoModelo, Quilometragem, Preco, Blindado, QuantidadeDonos
+                         Id, PlacaOuChassi, Marca, Modelo, Powertrain, Versao, Cor, Ano, AnoModelo, Quilometragem, Preco, Blindado, QuantidadeDonos
                          FROM automovel";
 
             using (MySqlConnection conexao = GetConnection())
@@ -33,7 +33,7 @@ namespace ConcessionariaAPI.Repository
         public void Alterar(Automovel automovel)
         {
             string sql = @"UPDATE automovel 
-                         SET MARCA = @Marca, MODELO = @Modelo, POWERTRAIN = @Powertrain, VERSAO = @Versao, COR = @Cor, 
+                         SET PLACAOUCHASSI = @PlacaOuChassi MARCA = @Marca, MODELO = @Modelo, POWERTRAIN = @Powertrain, VERSAO = @Versao, COR = @Cor, 
                          ANO = @Ano, ANOMODELO = @AnoModelo, QUILOMETRAGEM = @Quilometragem, PRECO = @Preco, 
                          BLINDADO = @Blindado, QUANTIDADEDONOS = @QuantidadeDonos WHERE Id = @id";
 
@@ -42,7 +42,7 @@ namespace ConcessionariaAPI.Repository
         public Automovel MostrarAutomovelPorId(int Id)
         {
             string sql = @"SELECT 
-                         Id, Marca, Modelo, Powertrain, Versao, Cor, Ano, AnoModelo, Quilometragem, Preco, Blindado, QuantidadeDonos
+                         Id, PlacaOuChassi, Marca, Modelo, Powertrain, Versao, Cor, Ano, AnoModelo, Quilometragem, Preco, Blindado, QuantidadeDonos
                          FROM automovel WHERE Id = @id";
             using (MySqlConnection conexao = GetConnection())
             {

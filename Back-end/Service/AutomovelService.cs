@@ -16,6 +16,9 @@ namespace ConcessionariaAPI.Services
 
         public void Inserir(Automovel automovel)
         {
+            if (!VerificarPlacaOuChassiValido(automovel))
+                throw new ArgumentException("Placa ou chassi inválido. (A placa deve ter 7 caracteres, ou o chassi deve ter 17 caracteres).");
+
             if (!VerificarAnoValido(automovel))
                 throw new ArgumentException("Ano inválido. O ano deve ser entre 1886 e o ano atual.");
 
@@ -27,6 +30,9 @@ namespace ConcessionariaAPI.Services
 
         public void Alterar(Automovel automovel)
         {
+            if (!VerificarPlacaOuChassiValido(automovel))
+                throw new ArgumentException("Placa ou chassi inválido. (A placa deve ter 7 caracteres, ou o chassi deve ter 17 caracteres).");
+
             if (!VerificarAnoValido(automovel))
                 throw new ArgumentException("Ano inválido. O ano deve ser entre 1886 e o ano atual.");
 
@@ -60,6 +66,17 @@ namespace ConcessionariaAPI.Services
 
             return true;
         }
-        
+
+        public bool VerificarPlacaOuChassiValido(Automovel automovel)
+        {
+
+            if (automovel.PlacaOuChassi.Length == 7 || automovel.PlacaOuChassi.Length == 17)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
     }
 }

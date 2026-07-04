@@ -1,8 +1,11 @@
-﻿namespace ConcessionariaAPI.Dtos
+﻿using System.Reflection.Metadata;
+
+namespace ConcessionariaAPI.Dtos
 {
     public class AutomovelResponseDTO
     {
         public int Id { get; set; }
+        public string PlacaOuChassi { get; set; }
         public string Marca { get; set; }
         public string Modelo { get; set; }
         public string Powertrain { get; set; }

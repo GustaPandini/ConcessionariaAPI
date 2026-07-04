@@ -4,6 +4,8 @@ namespace ConcessionariaAPI.Dtos
 {
     public class AutomovelRequestDTO
     {
+        [Required(ErrorMessage = "A Placa ou o Chassi são obrigatórios.")]
+        public string PlacaOuChassi { get; set; }
         [Required(ErrorMessage = "A Marca é obrigatória.")]
         public string Marca { get; set; }
 

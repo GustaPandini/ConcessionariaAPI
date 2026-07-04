@@ -79,6 +79,7 @@ namespace ConcessionariaAPI.Controllers
         {
             return new Automovel
             {
+                PlacaOuChassi = dto.PlacaOuChassi,
                 Marca = dto.Marca,
                 Modelo = dto.Modelo,
                 Powertrain = dto.Powertrain,
@@ -98,6 +99,7 @@ namespace ConcessionariaAPI.Controllers
             return new AutomovelResponseDTO
             {
                 Id = automovel.Id,
+                PlacaOuChassi = automovel.PlacaOuChassi,
                 Marca = automovel.Marca,
                 Modelo = automovel.Modelo,
                 Powertrain = automovel.Powertrain,
